@@ -63,7 +63,7 @@
             System.Diagnostics.Trace.WriteLine($"=============== {guid} Focus {element}");
             // Background、Input will cause problem.
             // Loaded seems ok.
-            element?.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+            element?.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
                 System.Diagnostics.Trace.WriteLine($"=============== {guid} BeginInvoke {element}");
                 var keybHack = Instance;
