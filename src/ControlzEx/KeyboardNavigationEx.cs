@@ -59,8 +59,10 @@
         /// <param name="element">The element which will be focused.</param>
         public static void Focus(UIElement? element)
         {
-            element?.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+            System.Diagnostics.Trace.WriteLine($"=============== Focus {element}");
+            element?.Dispatcher.BeginInvoke(DispatcherPriority.Send, new Action(() =>
             {
+                System.Diagnostics.Trace.WriteLine($"=============== BeginInvoke {element}");
                 var keybHack = Instance;
                 var alwaysShowFocusVisual = keybHack.AlwaysShowFocusVisualInternal;
                 keybHack.AlwaysShowFocusVisualInternal = true;
@@ -99,6 +101,7 @@
 
         private static void FrameworkElementGotFocus(object? sender, RoutedEventArgs e)
         {
+            System.Diagnostics.Trace.WriteLine($"=============== FrameworkElementGotFocus {sender}");
             Focus(sender as UIElement);
         }
 
