@@ -59,10 +59,13 @@
         /// <param name="element">The element which will be focused.</param>
         public static void Focus(UIElement? element)
         {
-            System.Diagnostics.Trace.WriteLine($"=============== Focus {element}");
-            element?.Dispatcher.BeginInvoke(DispatcherPriority.Send, new Action(() =>
+            var guid = Guid.NewGuid().ToString();
+            System.Diagnostics.Trace.WriteLine($"=============== {guid} Focus {element}");
+            // Background、Input will cause problem.
+            // Loaded seems ok.
+            element?.Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() =>
             {
-                System.Diagnostics.Trace.WriteLine($"=============== BeginInvoke {element}");
+                System.Diagnostics.Trace.WriteLine($"=============== {guid} BeginInvoke {element}");
                 var keybHack = Instance;
                 var alwaysShowFocusVisual = keybHack.AlwaysShowFocusVisualInternal;
                 keybHack.AlwaysShowFocusVisualInternal = true;
